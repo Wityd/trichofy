@@ -1,0 +1,21 @@
+[Unit]
+Description=Trichofy Hair Type Classifier API (FastAI ResNet18 + FastAPI)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=witness
+Group=witness
+WorkingDirectory=/home/witness/Hair-Type-Classifier
+Environment="PYTHONUNBUFFERED=1"
+Environment="NO_ALBUMENTATIONS_UPDATE=1"
+EnvironmentFile=-/home/witness/Hair-Type-Classifier/.env
+ExecStart=/home/witness/Hair-Type-Classifier/.venv/bin/python -m uvicorn app:app --host 0.0.0.0 --port 8000
+Restart=on-failure
+RestartSec=5
+# Give the 47 MB model time to load before systemd considers startup failed
+TimeoutStartSec=180
+
+[Install]
+WantedBy=multi-user.target
