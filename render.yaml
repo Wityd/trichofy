@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: trichofy-hair-api
+    runtime: python
+    plan: starter
+    region: frankfurt
+    rootDir: Hair-Type-Classifier
+    buildCommand: pip install --upgrade pip && pip install -r requirements-render.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      # Optional: OpenWeatherMap key used by GET /weather
+      - key: WEATHER_API_KEY
+        sync: false
+      # Optional: extra allowed CORS origin (e.g. a new frontend URL)
+      - key: FRONTEND_ORIGIN
+        sync: false

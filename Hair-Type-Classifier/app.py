@@ -171,7 +171,8 @@ sys.modules["__main__"].AlbumentationsTransform = AlbumentationsTransform
 # 2) Load model
 # =========================================================
 
-MODEL_PATH = os.path.join("models", "hair-resnet18-model.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "hair-resnet18-model.pkl")
 
 if not os.path.isfile(MODEL_PATH):
     raise FileNotFoundError(
